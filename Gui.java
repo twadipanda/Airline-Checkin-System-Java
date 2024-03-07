@@ -217,13 +217,24 @@ public class Gui extends JFrame{
 					passengerBooking = null;
 					updateBaggageDetails();
 				} 
-				catch (CheckInFailed | BookingNotFound | InvalidBookingReference | NumberFormatException  e1) {
+				catch (CheckInFailed | BookingNotFound | NumberFormatException  e1) {
 					JOptionPane.showMessageDialog(Gui.this,
-							"Something went wrong try again","Check-In Unsuccessful, You might have been checked in before.",
+							"Check-In Unsuccessful.","Something went wrong try again",
 							JOptionPane.ERROR_MESSAGE);
+					passengerBooking = null;
+					updateBaggageDetails();
+				}
+				catch(InvalidBookingReference e1) {
+					JOptionPane.showMessageDialog(Gui.this,
+							"You are already Checked In.", "Error - Already Checked In",
+							JOptionPane.ERROR_MESSAGE);
+					passengerBooking = null;
+					updateBaggageDetails();
 				}
 				catch(Exception e2) {
 					JOptionPane.showMessageDialog(Gui.this,"Something went wrong try again","Check-In Unsuccessful",JOptionPane.ERROR_MESSAGE);
+					passengerBooking = null;
+					updateBaggageDetails();
 				}
 			}
 		});
@@ -313,11 +324,13 @@ public class Gui extends JFrame{
 		else {
 			referenceCodeTextField.setText("");
 			lastNameTextField.setText("");
-			if(baggagePanel.isVisible()) {
-				bookingReferenceCodeLabel.setText("");
-				nameLabel.setText("");
-				baggagePanel.setVisible(false);
-			}
+			bookingReferenceCodeLabel.setText("");
+			nameLabel.setText("");
+			weightTextField.setText("0");
+			lengthTextField.setText("0");
+			widthTextField.setText("0");
+			heightTextField.setText("0");
+			baggagePanel.setVisible(false);
 		}
 	}
 
