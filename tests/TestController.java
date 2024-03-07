@@ -23,7 +23,7 @@ public class TestController {
 	*/
 	@Test
 	public void assertEqualCalculateFee() throws FileNotFoundException, InvalidBookingReference {
-		Data readData = new Data("src/bookings.csv","src/flights.csv");
+		Data readData = new Data("bookings.csv","flights.csv");
 		Controller ctrl = readData.read();
 		
 		Flight flight = new Flight("Edinburgh","BA",50,30,210,"BA-301");
@@ -37,7 +37,7 @@ public class TestController {
 	*/
 	@Test
 	public void assertReturnTypeIsBooking() throws FileNotFoundException, InvalidBookingReference {
-		Data readData = new Data("src/bookings.csv","src/flights.csv");
+		Data readData = new Data("bookings.csv","flights.csv");
 		Controller ctrl = readData.read();
 		assertEquals(ctrl.getBooking("Mahad", "PK-201").getClass(),Booking.class);
 	}
@@ -48,7 +48,7 @@ public class TestController {
 	*/
 	@Test
 	public void assertCheckInThrowsBookingNotFound() throws FileNotFoundException, InvalidBookingReference {
-		Data readData = new Data("src/bookings.csv","src/flights.csv");
+		Data readData = new Data("bookings.csv","flights.csv");
 		Controller ctrl = readData.read();
 		assertThrows(BookingNotFound.class, () ->  {
 			ctrl.checkIn("Abc", "PK-110", 10, 10);
