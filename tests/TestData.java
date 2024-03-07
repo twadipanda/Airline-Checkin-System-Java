@@ -2,6 +2,7 @@ package tests;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
+import org.junit.Ignore;
 import java.io.FileNotFoundException;
 import app.Data;
 import app.Controller;
@@ -19,13 +20,14 @@ public class TestData {
     });
  }
 
- @Test
-  public void assertThrowsInvalidBookingReference() {
-    assertThrows(InvalidBookingReference.class, () -> {
-      Data data = new Data("invalid_bookings.csv", "flights.csv");
-      data.read();
-    });
- }
+//  @Ignore
+//  @Test
+//   public void assertThrowsInvalidBookingReference() {
+//     assertThrows(InvalidBookingReference.class, () -> {
+//       Data data = new Data("invalid_bookings.csv", "flights.csv");
+//       data.read();
+//     });
+//  }
 
  @Test
   public void assertReturnTypeIsController() throws FileNotFoundException, InvalidBookingReference {

@@ -1,5 +1,6 @@
 package app;
 import exceptions.InvalidBookingReference;
+import java.util.regex.Pattern;
 
 /*
  * Booking class that manages booking details
@@ -12,13 +13,23 @@ public class Booking {
   private String flightCode;
   private boolean checkedIn = false;
 
-  public Booking(String bookingReference, String firstName, String lastName, Flight flight, String flightCode) {
+  /**
+   * Booking Constructor
+   * @exception InvalidBookingReference
+   */
+  public Booking(String bookingReference, String firstName, String lastName, Flight flight, String flightCode) throws InvalidBookingReference {
+    Pattern pattern = Pattern.compile("^[A-Z]{2}-\\d{3}$");
+    if (!pattern.matcher(bookingReference).find()) {
+      throw new InvalidBookingReference(bookingReference + ": is an invalid booking referene.");
+    }
+
     this.bookingReference = bookingReference;
     this.firstName = firstName;
     this.lastName = lastName;
     this.flight = flight;
     this.flightCode = flightCode;
   }
+
 
   /**
    * checkIn

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import exceptions.*;
 
@@ -63,28 +62,30 @@ public class Data {
 
     try (Scanner scanner = new Scanner(new File(bookingsPath))) {
       while (scanner.hasNextLine()) {
-        Scanner rowScanner = new Scanner(scanner.nextLine());
-        rowScanner.useDelimiter(",");
-        csvData = new HashMap<String, String>();
-        while (rowScanner.hasNext()) {
-          if (!csvData.containsKey("ref")) {
-            csvData.put("ref", rowScanner.next());
-            if (!pattern.matcher(csvData.get("ref")).find()) {
-              throw new InvalidBookingReference(csvData.get("ref") + ": is an invalid booking referene.");
+        try {
+          Scanner rowScanner = new Scanner(scanner.nextLine());
+          rowScanner.useDelimiter(",");
+          csvData = new HashMap<String, String>();
+          while (rowScanner.hasNext()) {
+            if (!csvData.containsKey("ref")) {
+              csvData.put("ref", rowScanner.next());
+            }
+            else if (!csvData.containsKey("fname")) {
+              csvData.put("fname", rowScanner.next());
+            }
+            else if (!csvData.containsKey("lname")) {
+              csvData.put("lname", rowScanner.next());
+            }
+            else {
+              csvData.put("flightCode", rowScanner.next());
             }
           }
-          else if (!csvData.containsKey("fname")) {
-            csvData.put("fname", rowScanner.next());
-          }
-          else if (!csvData.containsKey("lname")) {
-            csvData.put("lname", rowScanner.next());
-          }
-          else {
-            csvData.put("flightCode", rowScanner.next());
-          }
+          Booking booking = new Booking(csvData.get("ref"), csvData.get("fname"), csvData.get("lname"), mappedFlights.get(csvData.get("flightCode")), csvData.get("flightCode"));
+          bookings.put(csvData.get("lname")+csvData.get("ref"), booking);
         }
-        Booking booking = new Booking(csvData.get("ref"), csvData.get("fname"), csvData.get("lname"), mappedFlights.get(csvData.get("flightCode")), csvData.get("flightCode"));
-        bookings.put(csvData.get("lname")+csvData.get("ref"), booking);
+        catch (InvalidBookingReference e) {
+          continue;
+        }
       }
     }
     catch (FileNotFoundException e) {

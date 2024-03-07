@@ -1,51 +1,32 @@
 package tests;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import app.Booking;
-import app.Controller;
-import app.Data;
+import app.Flight;
 import exceptions.*;
-
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * unit test for the Booking class
- */
 public class TestBooking {
- 
-	/*
-	 * tests whether the Data read methods throws a FileNotFoundException
-	 * when provided with a file that does not exist
-	*/
+  Booking booking = null;
+  @BeforeEach
+  void init() throws InvalidBookingReference {
+    booking = new Booking("PK-201", "Muhammad", "Mahad", new Flight("LIA", "PIA", 30, 30, 30, "PK-201"), "PK-201");
+  }
+
   @Test
-  public void assertThrowsFileNotFoundException() {
-    assertThrows(FileNotFoundException.class, () -> {
-      Data data = new Data("etc.csv", "etc.csv");
-      data.read();
-    });
- }
-
-  /*
-	 * tests whether the Data read methods throws a InvalidBookingReference exception
-	 * when provided with a booking that does not exist
-	*/
- @Test
-  public void assertThrowsInvalidBookingReference() {
+  public void assertThrowsInvalidBookingReference() throws InvalidBookingReference {
+    booking.checkIn();
     assertThrows(InvalidBookingReference.class, () -> {
-      Data data = new Data("invalid_bookings.csv", "flights.csv");
-      data.read();
+      booking.checkIn();
     });
  }
 
- /*
-	 * tests whether the Data read methods returns a Controller object
-	*/
  @Test
-  public void assertReturnTypeIsController() throws FileNotFoundException, InvalidBookingReference {
-    Data data = new Data("bookings.csv", "flights.csv");
-    assertEquals(data.read().getClass(), Controller.class);
+  public void assertCheckInIsTrue() throws InvalidBookingReference {
+    assertEquals(true, booking.checkIn());
  }
+
 }
