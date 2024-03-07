@@ -13,7 +13,7 @@ public class App {
      * 
      */
 	public static void main(String[] args) throws FileNotFoundException, InvalidBookingReference, CheckInFailed, BookingNotFound {
-		Data reader = new Data("src/bookings.csv", "src/flights.csv");
+		Data reader = new Data("bookings.csv", "flights.csv");
 	    Controller controller = reader.read();
 		Gui gui = new Gui(controller);
 	}
