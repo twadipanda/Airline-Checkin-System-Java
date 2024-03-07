@@ -36,7 +36,7 @@ public class TestFlight {
 	@Test
 	public void assertThrowsInvalidBookingReference() {
 		assertThrows(InvalidBookingReference.class, () -> {
-		Data data = new Data("src/invalid_bookings.csv", "src/flights.csv");
+		Data data = new Data("invalid_bookings.csv", "flights.csv");
 		data.read();
 		});
 	}
@@ -46,7 +46,7 @@ public class TestFlight {
 	*/
 	@Test
 	public void assertReturnTypeIsController() throws FileNotFoundException, InvalidBookingReference {
-		Data data = new Data("src/bookings.csv", "src/flights.csv");
+		Data data = new Data("bookings.csv", "flights.csv");
 		assertEquals(data.read().getClass(), Controller.class);
 	}
 }
