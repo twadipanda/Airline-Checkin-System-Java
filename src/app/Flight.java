@@ -1,11 +1,7 @@
 package app;
 
-import exceptions.InvalidBookingReference;
+import app.Enums.FlightClass;
 
-/**
- * Flight
- * Manages Flight Details
- */
 public class Flight {
   private String destinationAirport;
   private String carrier;
@@ -17,14 +13,19 @@ public class Flight {
   private float totalBaggageWeight;
   private float totalBaggageVolume;
   private float totalFee;
+  private FlightClass class_;
+  private int departureTime;
+  private boolean departed = false;
 
-  public Flight(String destinationAirport, String carrier, int passengerCapacity, int maxBaggageWeight, int maxBaggageVolume, String flightCode) {
+  public Flight(String destinationAirport, String carrier, int passengerCapacity, int maxBaggageWeight, int maxBaggageVolume, String flightCode, FlightClass class_, int departureTime) {
     this.destinationAirport = destinationAirport;
     this.passengerCapacity = passengerCapacity;
     this.maxBaggageWeight = maxBaggageWeight;
     this.maxBaggageVolume = maxBaggageVolume;
     this.flightCode = flightCode;
     this.carrier = carrier;
+    this.class_ = class_;
+    this.departureTime = departureTime;
   }
 
   public int getPassengers() {
@@ -55,41 +56,21 @@ public class Flight {
     return passengerCapacity;
   }
 
-  /**
-   * incrementPassengers
-   * increments the total number of passengers checked in
-   * @return float
-   */
   public int incrementPassengers(int value) {
     this.numberOfPassengers += value;
     return this.numberOfPassengers;
   }
 
-  /**
-   * incrementFee
-   * increments the total excess baggage feess collected
-   * @return float
-   */
   public float incrementFee(float value) {
     this.totalFee += value;
     return this.totalFee;
   }
 
-  /**
-   * incrementWeight
-   * increments the total weight
-   * @return float
-   */
   public float incrementWeight(float value) {
     totalBaggageWeight += value;
     return totalBaggageWeight;
   }
 
-  /**
-   * incrementVolume
-   * increments the total volume
-   * @return float
-   */
   public float incrementVolume(float value) {
     totalBaggageVolume += value;
     return totalBaggageVolume;
@@ -97,6 +78,25 @@ public class Flight {
 
   public String getCode() {
     return flightCode; 
+  }
+  
+  public String getDestinationAirport() {
+	  return this.destinationAirport;
+  }
+
+  public FlightClass getClass_() {
+      return class_;
+  }
+  public int getDepartureTime() {
+      return departureTime;
+  }
+  
+  public boolean getDeparted() {
+	  return this.departed;
+  }
+  
+  public void setDeparted() {
+	  this.departed = true;
   }
 }
 

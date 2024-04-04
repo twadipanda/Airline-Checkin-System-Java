@@ -1,10 +1,7 @@
 package app;
+import app.Enums.BookingClass;
 import exceptions.InvalidBookingReference;
-import java.util.regex.Pattern;
 
-/*
- * Booking class that manages booking details
- * */
 public class Booking {
   private String bookingReference;
   private String firstName;
@@ -12,31 +9,17 @@ public class Booking {
   private Flight flight;
   private String flightCode;
   private boolean checkedIn = false;
+  private BookingClass bClass;
 
-  /**
-   * Booking Constructor
-   * @exception InvalidBookingReference
-   */
-  public Booking(String bookingReference, String firstName, String lastName, Flight flight, String flightCode) throws InvalidBookingReference {
-    Pattern pattern = Pattern.compile("^[A-Z]{2}-\\d{3}$");
-    if (!pattern.matcher(bookingReference).find()) {
-      throw new InvalidBookingReference(bookingReference + ": is an invalid booking referene.");
-    }
-
+  public Booking(String bookingReference, String firstName, String lastName, Flight flight, String flightCode, BookingClass bClass) {
     this.bookingReference = bookingReference;
     this.firstName = firstName;
     this.lastName = lastName;
     this.flight = flight;
     this.flightCode = flightCode;
+    this.bClass = bClass;
   }
 
-
-  /**
-   * checkIn
-   * checks in a particular booking
-   * @exception InvalidBookingReference
-   * @return boolean
-   */
   public boolean checkIn() throws InvalidBookingReference {
     if (checkedIn) {
       throw new InvalidBookingReference("Booking with reference: " + bookingReference + " already checked in...");
@@ -61,4 +44,11 @@ public class Booking {
     return firstName;
   }
 
+  public String getFlightCode() {
+      return flightCode;
+  }
+
+  public BookingClass getbClass() {
+      return bClass;
+  }
 }
