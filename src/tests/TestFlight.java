@@ -5,35 +5,46 @@ import org.junit.jupiter.api.Test;
 
 import app.Controller;
 import app.Data;
-import app.Flight;
 import exceptions.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
+/**
+ * unit test for the Flight class
+ */
 public class TestFlight {
  
-  @Test
-  public void assertThrowsFileNotFoundException() {
-    assertThrows(FileNotFoundException.class, () -> {
-      Data data = new Data("etc.csv", "etc.csv");
-      data.read();
+	/*
+	 * tests whether the Data read methods throws a FileNotFoundException
+	 * when provided with a file that does not exist
+	*/
+	@Test
+	public void assertThrowsFileNotFoundException() {
+		assertThrows(FileNotFoundException.class, () -> {
+		Data data = new Data("etc.csv", "etc.csv");
+		data.read();
     });
- }
+	}
 
- @Test
-  public void assertThrowsInvalidBookingReference() {
-    assertThrows(InvalidBookingReference.class, () -> {
-      Data data = new Data("invalid_bookings.csv", "flights.csv");
-      data.read();
-    });
- }
+	/*
+	 * tests whether the Data read methods throws a InvalidBookingReference
+	 * when provided with an invalid booking
+	*/
+	@Test
+	public void assertThrowsInvalidBookingReference() {
+		assertThrows(InvalidBookingReference.class, () -> {
+		Data data = new Data("src/invalid_bookings.csv", "src/flights.csv");
+		data.read();
+		});
+	}
 
- @Test
-  public void assertReturnTypeIsController() throws InvalidBookingReference, IOException {
-    Data data = new Data("bookings.csv", "flights.csv");
-    assertEquals(data.read().getClass(), Controller.class);
- }
+	/*
+	 * tests whether the Data read methods returns a Controller object
+	*/
+	@Test
+	public void assertReturnTypeIsController() throws InvalidBookingReference, IOException {
+		Data data = new Data("src/bookings.csv", "src/flights.csv");
+		assertEquals(data.read().getClass(), Controller.class);
+	}
 }
