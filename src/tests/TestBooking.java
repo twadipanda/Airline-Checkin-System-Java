@@ -2,16 +2,20 @@ package tests;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-import app.Booking;
+
 import app.Controller;
 import app.Data;
 import exceptions.*;
+import models.Booking;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * This class contains JUnit test cases for the Booking-related functionality.
+ */
 public class TestBooking {
  
   @Test
