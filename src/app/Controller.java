@@ -2,7 +2,8 @@ package app;
 
 import java.util.HashMap;
 
-import observers.FlightObserver;
+import models.Booking;
+import models.Flight;
 
 import java.util.ArrayList;
 
