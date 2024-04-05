@@ -1,6 +1,11 @@
-package app;
+package models;
 import java.util.Random;
 
+/**
+ * The Passenger class represents a passenger in the airline system.
+ * It holds information about the passenger, including their booking reference,
+ * first name, last name, flight code, total baggage weight, and total baggage volume.
+ */
 public class Passenger {
   private String bookingReference;
   private String firstName;
@@ -9,6 +14,14 @@ public class Passenger {
   private float totalBaggageWeight;
   private float totalBaggageVolume;
 
+  /**
+   * Constructs a Passenger object with the specified parameters.
+   * 
+   * @param bookingReference The booking reference of the passenger.
+   * @param firstName The first name of the passenger.
+   * @param lastName The last name of the passenger.
+   * @param flightCode The flight code of the flight the passenger is booked on.
+   */
   public Passenger(String bookingReference, String firstName,
   String lastName, String flightCode) {
     Random rand = new Random();

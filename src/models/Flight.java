@@ -1,7 +1,11 @@
-package app;
+package models;
 
-import app.Enums.FlightClass;
+import constants_and_singleton_classes.Enums.FlightClass;
 
+/**
+ * The Flight class represents a flight with various properties such as destination airport, carrier,
+ * passenger capacity, baggage limits, flight code, class, departure time, and more.
+ */
 public class Flight {
   private String destinationAirport;
   private String carrier;
@@ -17,6 +21,18 @@ public class Flight {
   private int departureTime;
   private boolean departed = false;
 
+  /**
+   * Constructs a Flight object with the specified properties.
+   * 
+   * @param destinationAirport The destination airport of the flight.
+   * @param carrier The carrier or airline operating the flight.
+   * @param passengerCapacity The maximum number of passengers the flight can accommodate.
+   * @param maxBaggageWeight The maximum baggage weight allowed per passenger.
+   * @param maxBaggageVolume The maximum baggage volume allowed per passenger.
+   * @param flightCode The unique code or identifier for the flight.
+   * @param class_ The class of the flight, which can be LAST_MINUTE or STANDARD.
+   * @param departureTime The departure time of the flight.
+   */
   public Flight(String destinationAirport, String carrier, int passengerCapacity, int maxBaggageWeight, int maxBaggageVolume, String flightCode, FlightClass class_, int departureTime) {
     this.destinationAirport = destinationAirport;
     this.passengerCapacity = passengerCapacity;
